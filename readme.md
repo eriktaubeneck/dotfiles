@@ -1,2 +1,2 @@
 # dotfiles
- `ln -a <file> ~/<file>`
+ `ln -s <file> ~/<file>`
