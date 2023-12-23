@@ -29,7 +29,7 @@
     changed = green
     untracked = cyan
 [core]
-    autocrlf = input
+	autocrlf = input
     editor = emacs
 [grep]
     linenumber = true
@@ -39,3 +39,9 @@
 	defaultBranch = main
 [code]
 	editor = vim
+[credential "https://github.com"]
+	helper =
+	helper = !/opt/homebrew/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper =
+	helper = !/opt/homebrew/bin/gh auth git-credential
