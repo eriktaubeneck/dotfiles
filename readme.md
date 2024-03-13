@@ -30,4 +30,9 @@ brew install spaceship
 - install [berkley mono font](https://berkeleygraphics.com/accounts/login/)
 - link dotfiles
 - clone [.emacs.d](https://github.com/eriktaubeneck/.emacs.d)
+```
+gh repo clone eriktaubeneck/.emacs.d
+git submodule init
+git submodule update
+```
 - install [emacs](https://emacsformacosx.com/) and cross your fingers!
