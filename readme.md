@@ -32,6 +32,7 @@ brew install spaceship
 - clone [.emacs.d](https://github.com/eriktaubeneck/.emacs.d)
 ```
 gh repo clone eriktaubeneck/.emacs.d
+cd .emacs.d
 git submodule init
 git submodule update
 ```
