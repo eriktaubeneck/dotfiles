@@ -27,7 +27,7 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 brew install spaceship
 ```
 - install [dracula theme for iterm](https://draculatheme.com/iterm) and import into iterm
-- install [berkley mono font](https://berkeleygraphics.com/accounts/login/)
+- install [berkley mono font](https://berkeleygraphics.com/accounts/login/) (prefer OTF files)
 - link dotfiles
 - clone [.emacs.d](https://github.com/eriktaubeneck/.emacs.d)
 ```
