@@ -87,6 +87,7 @@ plugins=(
     iterm2
     pep8
     virtualenv
+    rye
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -121,6 +122,15 @@ alias sv="source .venv/bin/activate || source venv/bin/activate"
 alias l="gls -gohF --color=always --group-directories-first | awk '{print \$3, \"\t\", \$4, \$5, \$6, \"\t\t\", \$7}'"
 alias ll='ls -lhp'
 alias pr="gh pr create --web"
+
+# mg is an lightweight like emacs editor which can startup fast with git commands
+# install it with `brew install mg`
+# if not available, use vim
+if command -v mg &> /dev/null; then
+  export GIT_EDITOR="mg"
+else
+  export GIT_EDITOR="vim"
+fi
 
 export PATH="$PATH:$HOME/.local/bin"
 export VOLTA_HOME="$HOME/.volta"

@@ -1,15 +1,15 @@
 [user]
-	name = Erik Taubeneck
-	email = erik.taubeneck@gmail.com
+    name = Erik Taubeneck
+    email = erik.taubeneck@gmail.com
 [alias]
-	co = checkout
-	lg = !git --no-pager log --color --decorate --all --graph --pretty=oneline --abbrev-commit -30
-        uncommit = reset --soft HEAD^
-        lgg = !git fetch --all --prune && git lg
-        ff = merge --ff-only
-        pr = !gh pr create --web
+    co = checkout
+    lg = !git --no-pager log --color --decorate --all --graph --pretty=oneline --abbrev-commit -30
+    uncommit = reset --soft HEAD^
+    lgg = !git fetch --all --prune && git lg
+    ff = merge --ff-only
+    pr = !gh pr create --web
 [apply]
-	whitespace = nowarn
+    whitespace = nowarn
 
 [color]
     branch = auto
@@ -29,8 +29,8 @@
     changed = green
     untracked = cyan
 [core]
-	autocrlf = input
-    editor = emacs
+    autocrlf = input
+    editor = vim
 [grep]
     linenumber = true
 [push]
@@ -38,11 +38,9 @@
     autoSetupRemote = true
 [init]
     defaultBranch = main
-[code]
-    editor = vim
 [credential "https://github.com"]
-	helper =
-	helper = !/opt/homebrew/bin/gh auth git-credential
+    helper =
+    helper = !/opt/homebrew/bin/gh auth git-credential
 [credential "https://gist.github.com"]
-	helper =
-	helper = !/opt/homebrew/bin/gh auth git-credential
+    helper =
+    helper = !/opt/homebrew/bin/gh auth git-credential
