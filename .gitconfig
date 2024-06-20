@@ -35,10 +35,11 @@
     linenumber = true
 [push]
     default = simple
+    autoSetupRemote = true
 [init]
-	defaultBranch = main
+    defaultBranch = main
 [code]
-	editor = vim
+    editor = vim
 [credential "https://github.com"]
 	helper =
 	helper = !/opt/homebrew/bin/gh auth git-credential
