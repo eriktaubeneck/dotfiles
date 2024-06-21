@@ -87,7 +87,6 @@ plugins=(
     iterm2
     pep8
     virtualenv
-    rye
 )
 
 source $ZSH/oh-my-zsh.sh
