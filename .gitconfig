@@ -34,7 +34,7 @@
 [grep]
     linenumber = true
 [push]
-    default = simple
+    default = current
     autoSetupRemote = true
 [init]
     defaultBranch = main
