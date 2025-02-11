@@ -121,6 +121,7 @@ alias sv="source .venv/bin/activate || source venv/bin/activate"
 alias l="gls -gohF --color=always --group-directories-first | awk '{print \$3, \"\t\", \$4, \$5, \$6, \"\t\t\", \$7}'"
 alias ll='ls -lhp'
 alias pr="gh pr create --web"
+alias emacs-cleanup="find . \( -type f -o -type l \) \( -name '.#*' -o -name '#*#' \) -delete"
 
 # mg is an lightweight like emacs editor which can startup fast with git commands
 # install it with `brew install mg`
