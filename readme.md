@@ -1,6 +1,13 @@
 # dotfiles
  `ln -s <file> ~/<file>`
 
+```
+ln -s $(pwd)/.gitconfig ~/.gitconfig
+ln -s $(pwd)/.zshrc ~/.zshrc
+mkdir -p ~/.config
+ln -s $(pwd)/starship.toml ~/.config/starship.toml
+```
+
 
 ## setup new machine
 
@@ -22,12 +29,13 @@ gh repo clone eriktaubeneck/dotfiles
 ```
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 ```
-- install [spaceship theme](https://github.com/spaceship-prompt/spaceship-prompt)
+- install [starship theme](https://starship.rs)
 ```
-brew install spaceship
+brew install starship
 ```
 - install [dracula theme for iterm](https://draculatheme.com/iterm) and import into iterm
 - install [berkley mono font](https://berkeleygraphics.com/accounts/login/) (prefer OTF files)
+- install [hack nerd font](https://www.nerdfonts.com/font-downloads) (for non-ASCII character)
 - link dotfiles
 - clone [.emacs.d](https://github.com/eriktaubeneck/.emacs.d)
 ```
