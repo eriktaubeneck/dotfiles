@@ -1,10 +1,12 @@
 # version: 1.0.0
 
+palette = 'dracula'
+
 add_newline = true
-continuation_prompt = "[▸▹ ](dimmed white)"
+continuation_prompt = "[    ❯❯ ](dimmed white)"
 
 format = """
-[┌─ ](dimmed white)\
+[╭─](dimmed white)\
 $nix_shell\
 $container\
 $hostname\
@@ -15,18 +17,17 @@ $env_var\
 $jobs\
 $sudo\
 $username\
-$character\
-$singularity\
-$kubernetes\
+$os\
 $directory\
-$vcsh\
-$fossil_branch\
 $git_branch\
-$git_commit\
-$git_state\
 $git_status\
 $git_metrics\
 $hg_branch\
+([](bg:prev_bg fg:background2)[ ](bg:prev_fg)\
+$singularity\
+$kubernetes\
+$vcsh\
+$fossil_branch\
 $pijul_channel\
 $docker_context\
 $package\
@@ -81,24 +82,75 @@ $aws\
 $gcloud\
 $openstack\
 $azure\
-$crystal\
-[ $fill ]()\
+$crystal)\
+[](fg:background bg:prev_bg)\
+[≻$fill≺](dimmed white)\
+[](bg:background fg:background2)\
 $battery\
 $time\
-[ ─┐](dimmed white)
-[└─ ](dimmed white)\
-$os❯ \
+[](fg:background bg:background2)\
+[─╮](dimmed white)
+[╰─ ](dimmed white)\
+$character❯ \
 """
 
 right_format = """
 $custom\
 $status\
-$cmd_duration\
-[ ─┘](dimmed white)
+$cmd_duration \
+[─╯](dimmed white)
 """
+
+
+[palettes.dracula]
+
+background='#282A36'
+background2='#454758'
+background3='#24667d'
+background4='#0284a1'
+
+foreground='#F8F8F2'
+selection='#44475A'
+comment='#6272A4'
+red='#FF5555'
+orange='#FFB86C'
+yellow='#F1FA8C'
+green='#50FA7B'
+purple='#BD93F9'
+cyan='#8BE9FD'
+pink='#FF79C6'
+
 
 [fill]
 symbol = '─'
+
+
+[os]
+disabled = false
+format = " $symbol [](fg:background4)"
+
+[os.symbols]
+Windows = "󰍲"
+Ubuntu = "󰕈"
+SUSE = ""
+Raspbian = "󰐿"
+Mint = "󰣭"
+Macos = "󰀵"
+Manjaro = ""
+Linux = "󰌽"
+Gentoo = "󰣨"
+Fedora = "󰣛"
+Alpine = ""
+Amazon = ""
+Android = ""
+Arch = "󰣇"
+Artix = "󰣇"
+EndeavourOS = ""
+CentOS = ""
+Debian = "󰣚"
+Redhat = "󱄛"
+RedHatEnterprise = "󱄛"
+Pop = ""
 
 [character]
 format = "$symbol "
@@ -121,138 +173,106 @@ symbol = "⋈┈"
 disabled = false
 
 [username]
-style_user = "bright-yellow bold italic"
-style_root = "purple bold italic"
+style_user = "bright-yellow bold italic bg:prev_bg"
+style_root = "purple bold italic bg:prev_bg"
 format = "[⭘ $user]($style) "
 disabled = false
 show_always = false
 
+
+[jobs]
+format = "[$symbol$number]($style)"
+style = "white bg:prev_bg"
+symbol = "[▶](blue italic)"
+
+[localip]
+ssh_only = true
+format = " ◯[$localipv4](bold magenta bg:prev_bg)"
+disabled = false
+
+
 [directory]
+format = "[$path]($style)[$read_only]($read_only_style)"
 home_symbol = "~"
 truncation_length = 3
 truncation_symbol = "…/"
 truncate_to_repo=false
 read_only = " ◈"
 use_os_path_sep = true
-style = "italic blue"
-format = "[$path]($style)[$read_only]($read_only_style)"
-repo_root_style = 'bold blue'
-# repo_root_format = '[$before_root_path]($before_repo_root_style)[$repo_root]($repo_root_style)[$path]($style)[$read_only]($read_only_style) [△](bold bright-blue)'
-
-[cmd_duration]
-min_time = 0
-show_milliseconds = true
-format = "[◄ $duration](italic white)"
-
-[jobs]
-format = "[$symbol$number]($style) "
-style = "white"
-symbol = "[▶](blue italic)"
-
-[localip]
-ssh_only = true
-format = " ◯[$localipv4](bold magenta)"
-disabled = false
-
-[time]
-disabled = false
-format = "[$time]($style)"
-time_format = "%R"
-utc_time_offset = "local"
-style = "italic dimmed white"
-
-[battery]
-format = "[$percentage $symbol ]($style)"
-full_symbol = "█"
-charging_symbol = "[↑](italic bold green)"
-discharging_symbol = "↓"
-unknown_symbol = "░"
-empty_symbol = "▃"
-
-[[battery.display]]
-threshold = 20
-style = "italic bold red"
-
-[[battery.display]]
-threshold = 60
-style = "italic dimmed bright-purple"
-
-[[battery.display]]
-threshold = 100
-style = "italic dimmed yellow"
+style = "white bg:background4"
+repo_root_style = 'bold white bg:prev_bg'
+repo_root_format = '[$before_root_path]($before_repo_root_style)[$repo_root]($repo_root_style)[$path]($style)[$read_only]($read_only_style)'
 
 [git_branch]
-format = " [$symbol $branch(:$remote_branch)]($style)"
+format = "[](bg:prev_bg fg:background3)[$symbol $branch(:$remote_branch)]($style)"
 symbol = ""
-# symbol = "[△](bold italic bright-blue)"
-style = "italic bright-blue"
+style = "italic pink bg:background3"
 truncation_symbol = "⋯"
 truncation_length = 11
-# ignore_branches = ["main", "master"]
 only_attached = true
 
+
+[git_status]
+style = "bold italic pink bg:prev_bg"
+format = "([ $ahead_behind$staged$modified$untracked$renamed$deleted$conflicted$stashed ]($style))"
+conflicted = "[◪◦](italic bright-magenta bg:prev_bg)"
+ahead = "[▴│[${count}](bold white bg:prev_bg)│](italic green bg:prev_bg)"
+behind = "[▿│[${count}](bold white bg:prev_bg)│](italic red bg:prev_bg)"
+diverged = "[◇ ▴┤[${ahead_count}](regular white bg:prev_bg)│▿┤[${behind_count}](regular white bg:prev_bg)│](italic bright-magenta bg:prev_bg)"
+untracked = "[◌◦](italic pink bg:prev_bg)"
+stashed = "[◃◈](italic white bg:prev_bg)"
+modified = "[●◦](italic pink bg:prev_bg)"
+staged = "[▪┤[$count](bold white bg:prev_bg)│](italic bright-cyan bg:prev_bg)"
+renamed = "[◎◦](italic bright-blue bg:prev_bg)"
+deleted = "[✕](italic red bg:prev_bg)"
+
 [git_metrics]
-format = '( [▴$added]($added_style))([▿$deleted]($deleted_style))'
-added_style = 'italic dimmed green'
-deleted_style = 'italic dimmed red'
+format = '([▴$added]($added_style))([ ▿$deleted]($deleted_style))'
+added_style = 'italic green bg:prev_bg'
+deleted_style = 'italic red bg:prev_bg'
 ignore_submodules = true
 disabled = false
 
-[git_status]
-style = "bold italic bright-blue"
-format = "([ $ahead_behind$staged$modified$untracked$renamed$deleted$conflicted$stashed]($style))"
-conflicted = "[◪◦](italic bright-magenta)"
-ahead = "[▴│[${count}](bold white)│](italic green)"
-behind = "[▿│[${count}](bold white)│](italic red)"
-diverged = "[◇ ▴┤[${ahead_count}](regular white)│▿┤[${behind_count}](regular white)│](italic bright-magenta)"
-untracked = "[◌◦](italic bright-yellow)"
-stashed = "[◃◈](italic white)"
-modified = "[●◦](italic yellow)"
-staged = "[▪┤[$count](bold white)│](italic bright-cyan)"
-renamed = "[◎◦](italic bright-blue)"
-deleted = "[✕](italic red)"
-
 [deno]
-format = " [deno](italic) [∫ $version](green bold)"
+format = " [deno](italic) [∫ $version](green bold bg:prev_bg)"
 version_format = "${raw}"
 
 [lua]
 format = " [lua](italic) [${symbol}${version}]($style)"
 version_format = "${raw}"
 symbol = "⨀ "
-style = "bold bright-yellow"
+style = "bold bright-yellow bg:prev_bg"
 
 [nodejs]
-format = " [node](italic) [◫ ($version)](bold bright-green)"
+format = "[ node](italic) [◫ ($version)](bold bright-green bg:prev_bg)"
 version_format = "${raw}"
 detect_files = ["package-lock.json", "yarn.lock"]
 detect_folders = ["node_modules"]
 detect_extensions = []
 
 [python]
-format = " [${symbol} ${version}]($style)"
+format = "[ ${symbol} ${version} ⟡$virtualenv]($style)"
 symbol = ""
-# symbol = "[⌉](bold bright-blue)⌊ "
 version_format = "${raw}"
-style = "bold bright-yellow"
+style = "bold blue bg:prev_bg"
 
 [ruby]
-format = " [rb](italic) [${symbol}${version}]($style)"
+format = "[ rb](italic bg:prev_bg) [${symbol}${version}]($style)"
 symbol = "◆ "
 version_format = "${raw}"
-style = "bold red"
+style = "bold red bg:prev_bg"
 
 [rust]
-format = " [rs](italic) [$symbol$version]($style)"
+format = "[ rs](italic bg:prev_bg) [$symbol$version]($style)"
 symbol = "⊃ "
 version_format = "${raw}"
-style = "bold red"
+style = "bold red bg:prev_bg"
 
 [package]
-format = " |[ $symbol $version]($style)"
+format = "[$symbol $version]($style)"
 version_format = "v${raw}"
 symbol = "󰏗"
-style = "dimmed yellow italic bold"
+style = "dimmed yellow italic bold bg:prev_bg"
 
 [swift]
 format = " [sw](italic) [${symbol}${version}]($style)"
@@ -330,30 +350,39 @@ unknown_msg = '[◌](bold dimmed ellow)'
 symbol = "◇ "
 format = " spack [$symbol$environment]($style)"
 
-[os]
+
+# RIGHT
+[battery]
+format = "[$symbol$percentage ]($style)"
+full_symbol = "󰮭"
+charging_symbol = "[↑](italic bold green bg:prev_fg)"
+discharging_symbol = "↓"
+unknown_symbol = "░"
+empty_symbol = "▃"
+
+[[battery.display]]
+threshold = 20
+style = "italic bold red bg:background2"
+
+[[battery.display]]
+threshold = 60
+style = "italic bright-purple bg:background2"
+
+[[battery.display]]
+threshold = 100
+style = "italic cyan bg:background2"
+
+[time]
 disabled = false
-format = "$symbol "
+format = "[$time ]($style)"
+time_format = "%R"
+utc_time_offset = "local"
+style = "italic white bg:background2"
 
 
-[os.symbols]
-Windows = "󰍲"
-Ubuntu = "󰕈"
-SUSE = ""
-Raspbian = "󰐿"
-Mint = "󰣭"
-Macos = "󰀵"
-Manjaro = ""
-Linux = "󰌽"
-Gentoo = "󰣨"
-Fedora = "󰣛"
-Alpine = ""
-Amazon = ""
-Android = ""
-Arch = "󰣇"
-Artix = "󰣇"
-EndeavourOS = ""
-CentOS = ""
-Debian = "󰣚"
-Redhat = "󱄛"
-RedHatEnterprise = "󱄛"
-Pop = ""
+
+# RIGHT BOTTOM
+[cmd_duration]
+min_time = 0
+show_milliseconds = true
+format = "[◄ $duration](italic white)"
