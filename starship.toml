@@ -60,7 +60,7 @@ $perl\
 $php\
 $pulumi\
 $purescript\
-$python\
+$python${custom.novenv}\
 $raku\
 $rlang\
 $red\
@@ -208,7 +208,7 @@ format = "[](bg:prev_bg fg:background3)[$symbol $branch(:$remote_branch)]($st
 symbol = ""
 style = "italic pink bg:background3"
 truncation_symbol = "⋯"
-truncation_length = 11
+truncation_length = 40
 only_attached = true
 
 
@@ -251,10 +251,19 @@ detect_folders = ["node_modules"]
 detect_extensions = []
 
 [python]
-format = "[ ${symbol} ${version} ⟡$virtualenv]($style)"
+format = "[ (${symbol} ${version} venv:$virtualenv)]($style)"
 symbol = ""
+python_binary = ["python3", "python"]
 version_format = "${raw}"
 style = "bold blue bg:prev_bg"
+
+[custom.novenv]
+description = "show indicator when venv is missing"
+command = """
+print "NO VENV"
+"""
+when = '''[[ -f "requirements.txt" || -f "pyproject.toml" || -f "poetry.lock" || -f "Pipfile" ]] && [[ -z "$VIRTUAL_ENV" ]]'''
+format = '[($output)](bold red bg:prev_bg)'
 
 [ruby]
 format = "[ rb](italic bg:prev_bg) [${symbol}${version}]($style)"
