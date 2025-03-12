@@ -1,11 +1,8 @@
 # dotfiles
- `ln -s <file> ~/<file>`
+
 
 ```
-ln -s $(pwd)/.gitconfig ~/.gitconfig
-ln -s $(pwd)/.zshrc ~/.zshrc
-mkdir -p ~/.config
-ln -s $(pwd)/starship.toml ~/.config/starship.toml
+./setup.sh
 ```
 
 
