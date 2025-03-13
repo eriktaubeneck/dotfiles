@@ -109,6 +109,24 @@ source $ZSH/oh-my-zsh.sh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
 #
+
+# setup PIP_CONFIG_FILE env for /workspace
+function update_pip_config_env() {
+    if [[ -e "$HOME/.pip/workspace_pip.conf" && $PWD == $HOME/workspace(|/*) ]]; then
+        export PIP_CONFIG_FILE="$HOME/.pip/workspace_pip.conf"
+    else
+        unset PIP_CONFIG_FILE
+    fi
+}
+
+# Trigger the function whenever the directory changes
+autoload -U add-zsh-hook
+add-zsh-hook chpwd update_pip_config_env
+
+# Run once when the shell starts
+update_pip_config_env
+
+
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
